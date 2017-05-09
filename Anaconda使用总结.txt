@@ -25,10 +25,6 @@ Anaconda的下载页参见官网下载，Linux、Mac、Windows均支持。
 echo 'export PATH="~/anaconda2/bin:$PATH"' >> ~/.bashrc
 # 更新bashrc以立即生效
 source ~/.bashrc
-1
-2
-3
-4
 # 将anaconda的bin目录加入PATH，根据版本不同，也可能是~/anaconda3/bin
 echo 'export PATH="~/anaconda2/bin:$PATH"' >> ~/.bashrc
 # 更新bashrc以立即生效
@@ -60,24 +56,7 @@ source deactivate python34 # for Linux & Mac
 
 # 删除一个已有的环境
 conda remove --name python34 --all
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
+
 # 创建一个名为python34的环境，指定Python版本是3.4（不用管是3.4.x，conda会为我们自动寻找3.4.x中的最新版本）
 conda create --name python34 python=3.4
  
@@ -116,13 +95,7 @@ conda install scipy
 # 查看已经安装的packages
 conda list
 # 最新版的conda是从site-packages文件夹中搜索已经安装的包，不依赖于pip，因此可以显示出通过各种方式安装的包
-1
-2
-3
-4
-5
-6
-7
+
 # 安装scipy
 conda install scipy
 # conda会从从远程搜索scipy的相关信息和依赖项目，对于python 3.4，conda会同时安装numpy和mkl（运算加速的库）
@@ -152,25 +125,7 @@ conda update -n python34 numpy
 
 # 删除package
 conda remove -n python34 numpy
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
+
 # 查看当前环境下已安装的包
 conda list
  
@@ -202,15 +157,7 @@ conda update anaconda
 # 更新python
 conda update python
 # 假设当前环境是python 3.4, conda会将python升级为3.4.x系列的当前最新版本
-1
-2
-3
-4
-5
-6
-7
-8
-9
+
 # 更新conda，保持conda最新
 conda update conda
  
@@ -229,12 +176,7 @@ conda install anaconda
 # 结合创建环境的命令，以上操作可以合并为
 conda create -n python34 python=3.4 anaconda
 # 也可以不用全部安装，根据需求安装自己需要的package即可
-1
-2
-3
-4
-5
-6
+
 # 在当前环境下安装anaconda包集合
 conda install anaconda
  
@@ -252,12 +194,7 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 
 # 设置搜索时显示通道地址
 conda config --set show_channel_urls yes
-1
-2
-3
-4
-5
-6
+
 # 添加Anaconda的TUNA镜像
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 # TUNA的help中镜像地址加有引号，需要去掉
