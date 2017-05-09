@@ -1,0 +1,17 @@
+1,建立tensorflow的运行环境: conda create -n tensorflow python=3.5
+2,激活进入这个环境: activate tensorflow
+3,安装CPU版TensorFlow 0.12: pip install --upgrade https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.0rc0-cp35-cp35m-win_amd64.whl
+4,如果安装失败可以直接在http://www.lfd.uci.edu/~gohlke/pythonlibs/下载tensorflow-1.1.0-cp35-cp35m-win_amd64.whl到本地
+5,本地安装pip install tensorflow-1.1.0-cp35-cp35m-win_amd64.whl
+
+
+
+
+
+
+
+
+
+
+
+

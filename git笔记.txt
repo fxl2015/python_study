@@ -1,0 +1,135 @@
+1,新建仓库：
+初始化一个Git仓库，使用git init命令。
+添加文件到Git仓库，分两步：
+	第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+	第二步，使用命令git commit，完成。
+
+2,查看状态：
+要随时掌握工作区的状态，使用git status命令。
+如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
+
+3,回退版本：
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+4,撤销修改：
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，
+	   第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+
+5,删除文件：
+1),git checkout -- readme.txt其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+2),命令git rm用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，
+你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
+
+
+
+1. 通过命令 git init 把这个目录变成git可以管理的仓库
+2. 使用命令 git add readme.txt添加到暂存区里面去
+3. 用命令 git commit告诉Git，把文件提交到仓库
+4. 通过命令git status来查看是否还有文件未提交
+5. git diff readme.txt看下readme.txt文件到底改了什么内容
+6. git log查看下历史记录,如果嫌上面显示的信息太多的话，我们可以使用命令 git log –-pretty=oneline
+7. 通过如下命令即可获取到版本号：git reflog 
+8. 通过版本号回退，使用命令方法如下：git reset  –-hard 版本号
+9. 丢弃工作区的修改git checkout -- readme.txt
+10. 命令git checkout -- readme.txt 中的--很重要，如果没有--的话，那么命令变成创建分支了。
+11. 一般情况下，可以直接在文件目录中把文件删了，或者使用如上rm命令：rm b.txt
+	如果我想彻底从版本库中删掉了此文件的话，可以再执行commit命令提交掉.
+12. 在版本库中恢复此文件git checkout -- b.txt
+13. git remote add origin https://github.com/fxl2015/testgit20170505.git
+14. 把本地库的内容推送到远程，使用 git push命令，实际上是把当前分支master推送到远程
+15. 只要本地作了提交，就可以通过如下命令：git push origin master把本地master分支的最新修改推送到github上了
+16. 远程库已经准备好了，下一步是使用命令git clone克隆一个本地库
+17. 首先，我们来创建dev分支，然后切换到dev分支上,git checkout 命令加上 –b参数表示创建并切换，相当于如下2条命令
+	git branch dev
+	git checkout dev
+	git branch查看分支，会列出所有的分支，当前分支前面会添加一个星号。
+18. git branch master切换到主分支
+19. 把dev分支上的内容合并到分支master上可以在master分支上，使用如下命令 git merge dev 
+20. 总结创建与合并分支命令如下：
+   查看分支：git branch
+   创建分支：git branch name
+   切换分支：git checkout name
+创建+切换分支：git checkout –b name
+合并某分支到当前分支：git merge name
+删除分支：git branch –d name
+
+21. 当你从远程库克隆时候，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且远程库的默认名称是origin。
+	要查看远程库的信息 使用 git remote
+	要查看远程库的详细信息 使用 git remote –v
+22. 因此：多人协作工作模式一般是这样的：
+	首先，可以试图用git push origin branch-name推送自己的修改.
+	如果推送失败，则因为远程分支比你的本地更新早，需要先用git pull试图合并。
+	如果合并有冲突，则需要解决冲突，并在本地提交。再用git push origin branch-name推送。
+
+Git基本常用命令如下：
+
+   mkdir：         XX (创建一个空目录 XX指目录名)
+
+   pwd：          显示当前目录的路径。
+
+   git init          把当前的目录变成可以管理的git仓库，生成隐藏.git文件。
+
+   git add XX       把xx文件添加到暂存区去。
+
+   git commit –m “XX”  提交文件 –m 后面的是注释。
+
+   git status        查看仓库状态
+
+   git diff  XX      查看XX文件修改了那些内容
+
+   git log          查看历史记录
+
+   git reset  –hard HEAD^ 或者 git reset  –hard HEAD~ 回退到上一个版本
+
+                        (如果想回退到100个版本，使用git reset –hard HEAD~100 )
+
+   cat XX         查看XX文件内容
+
+   git reflog       查看历史记录的版本号id
+
+   git checkout — XX  把XX文件在工作区的修改全部撤销。
+
+   git rm XX          删除XX文件
+
+   git remote add origin https://github.com/tugenhua0707/testgit 关联一个远程库
+
+   git push –u(第一次要用-u 以后不需要) origin master 把当前master分支推送到远程库
+
+   git clone https://github.com/tugenhua0707/testgit  从远程库中克隆
+
+   git checkout –b dev  创建dev分支 并切换到dev分支上
+
+   git branch  查看当前所有的分支
+
+   git checkout master 切换回master分支
+
+   git merge dev    在当前的分支上合并dev分支
+
+   git branch –d dev 删除dev分支
+
+   git branch name  创建分支
+
+   git stash 把当前的工作隐藏起来 等以后恢复现场后继续工作
+
+   git stash list 查看所有被隐藏的文件列表
+
+   git stash apply 恢复被隐藏的文件，但是内容不删除
+
+   git stash drop 删除文件
+
+   git stash pop 恢复文件的同时 也删除文件
+
+   git remote 查看远程库的信息
+
+   git remote –v 查看远程库的详细信息
+
+   git push origin master  Git会把master分支推送到远程库对应的远程分支上
+
+
+
+
+
