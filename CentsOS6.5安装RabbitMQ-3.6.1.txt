@@ -1,0 +1,91 @@
+
+引用地址：http://www.cnblogs.com/4----/p/6518801.html
+
+一,安装编译工具
+yum -y install make gcc gcc-c++ kernel-devel m4 ncurses-devel openssl-devel
+
+二,安装Erlang
+1. 下载erlang
+下载地址：http://download.csdn.net/detail/a15134566493/9517595
+官方下载地址：http://erlang.org/download/otp_src_18.3.tar.gz
+2.安装
+
+#解压
+tar xvf otp_src_18.3.tar.gz
+cd otp_src_18.3
+
+#配置 '--prefix'指定的安装目录
+./configure --prefix=/usr/local/erlang --with-ssl -enable-threads -enable-smmp-support -enable-kernel-poll --enable-hipe --without-javac
+
+#安装
+make && make install
+
+3.配置erlang环境变量
+
+vim /etc/profile
+
+#在文件末尾添加下面代码 'ERLANG_HOME'等于上一步'--prefix'指定的目录
+ERLANG_HOME=/usr/local/erlang
+PATH=$ERLANG_HOME/bin:$PATH
+export ERLANG_HOME
+export PATH
+
+#使环境变量生效
+source /etc/profile
+
+#输入命令检验是否安装成功
+erl
+
+三,安装rabbitmq
+
+　　1.去官网下载二进制包，解压之后，移动到/usr/local下面；
+
+　　2.直接进sbin目录启动./rabbitmq-server，或者后台启动./rabbitmq-server -detached,如果启动的时候提示插件未能启动，并且管理界面打不开，那么启动一下插件：
+
+　　   ./rabbitmq-plugins enable rabbitmq_management
+
+　　3. 关闭，./rabbitmqctl stop
+
+　　4.关闭服务器防火墙或者打开rabbitmq对应的端口，直接访问http://localhost:15672/，此时的默认帐号guest/guest无法访问，因为次帐号需要local才行
+
+　　5.手动创建admin帐号：./rabbitmqctl add_user admin 123456，给管理员权限：./rabbitmqctl set_user_tags admin administrator
+
+如果配置connection-factory时，采用默认的guest/guest账号密码时，有可能会出现org.springframework.amqp.AmqpAuthenticationException: com.rabbitmq.client.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.的错误提示，解决办法是新建一个管理员权限的用户，并允许访问虚拟主机。步骤如下：
+
+1、打开http://localhost:15672/
+2、Admin ——> Users, 新建用户，administrator权限。
+3、Virtual Hosts，设置新建用户允许访问。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
